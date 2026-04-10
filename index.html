@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AUTOSERVIS. NÁVSÍ.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-main: #FFFFFF;
+            --text-sub: rgba(255, 255, 255, 0.6);
+            --btn-bg: #FFFFFF;
+            --btn-text: #000000;
+            --card-border: rgba(255, 255, 255, 0.1);
+            --font-head: 'Archivo Black', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .full-width-container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .sub-header-text {
+            color: var(--text-sub);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+
+        .main-headline {
+            font-family: var(--font-head);
+            font-size: 42px;
+            line-height: 1.0;
+            text-transform: uppercase;
+            font-style: italic;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .hero-section { padding-top: 60px; text-align: center; }
+        .hero-headline span { display: block; }
+        .hero-headline .navsi { color: #444; }
+
+        .btn-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 50px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-white {
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .icon-mail { width: 20px; height: 16px; fill: currentColor; }
+
+        .service-list { width: 100%; display: flex; flex-direction: column; }
+        .service-item {
+            width: 100%;
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .service-item + .service-item { border-top: none; }
+        .service-icon { font-size: 24px; }
+        .service-name { font-family: var(--font-head); font-size: 22px; text-transform: uppercase; font-style: italic; }
+        .service-desc { color: var(--text-sub); font-size: 13px; line-height: 1.6; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .review-headline { margin-bottom: 20px; }
+        .review-score { font-family: var(--font-head); font-size: 36px; font-style: italic; margin-bottom: 30px; }
+        .review-card {
+            width: 100%;
+            border: 1px solid var(--card-border);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .review-author { font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; }
+        .stars { color: #FFD700; letter-spacing: -2px; }
+        .review-text { color: var(--text-sub); font-size: 13px; line-height: 1.8; text-transform: uppercase; font-style: italic; }
+
+        .contact-content { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+        .owner-name { font-family: var(--font-head); font-size: 24px; font-style: italic; text-transform: uppercase; }
+        .owner-ico { color: var(--text-sub); font-size: 11px; letter-spacing: 1px; margin-top: -15px; }
+        .contact-link { font-weight: 700; font-size: 20px; color: var(--text-main); text-decoration: none; letter-spacing: 0.5px; }
+        .contact-link.email { color: var(--text-sub); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .divider { width: 80px; height: 1px; background-color: rgba(255, 255, 255, 0.1); margin: 20px 0; }
+        .hours-grid { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .day { text-align: left; }
+        .time { text-align: right; }
+
+        .map-wrapper { width: 100%; height: 300px; border: 1px solid var(--card-border); position: relative; margin-bottom: 30px; }
+        .map-btn { position: absolute; top: 15px; left: 15px; background-color: white; color: #1a73e8; padding: 8px 12px; border-radius: 4px; font-size: 12px; text-decoration: none; display: flex; align-items: center; gap: 5px; font-weight: 700; }
+
+        /* --- UPRAVENÁ PATIČKA --- */
+        footer { width: 100%; text-align: center; padding: 30px 0; margin-top: auto; }
+        .webflow-logo { font-size: 10px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 4px; }
+        .author-phone { font-size: 9px; color: var(--text-sub); letter-spacing: 1px; margin-bottom: 10px; display: block; text-decoration: none; }
+        .designed-by { font-size: 9px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 3px; opacity: 0.5; }
+
+    </style>
+</head>
+<body>
+
+    <div class="full-width-container hero-section">
+        <div class="sub-header-text">VÁCLAV FRANTA</div>
+        <h1 class="main-headline hero-headline">
+            <span>AUTOSERVIS.</span>
+            <span class="navsi">NÁVSÍ.</span>
+        </h1>
+        <div class="btn-container">
+            <a href="mailto:AUTOSERVISVF@SEZNAM.CZ" class="btn btn-white">
+                E-MAIL
+                <svg class="icon-mail" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+        </div>
+        <div class="sub-header-text">NÁVSÍ 760, 739 92</div>
+    </div>
+
+    <div class="full-width-container">
+        <h2 class="main-headline">SLUŽBY</h2>
+        <div class="service-list">
+            <div class="service-item">
+                <div class="service-icon">⚡</div>
+                <div class="service-name">ELEKTRIKA</div>
+                <div class="service-desc">OPRAVY ELEKTRICKÝCH ZAŘÍZENÍ A DIAGNOSTIKA.</div>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">⚙️</div>
+                <div class="service-name">BRZDY</div>
+                <div class="service-desc">KOMPLETNÍ SERVIS A OPRAVY BRZDOVÝCH SYSTÉMŮ.</div>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">🛢️</div>
+                <div class="service-name">VÝMĚNA OLEJE</div>
+                <div class="service-desc">PRAVIDELNÁ ÚDRŽBA A VÝMĚNA PROVOZNÍCH KAPALIN.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="full-width-container">
+        <h2 class="main-headline review-headline">HODNOCENÍ</h2>
+        <div class="review-score">4.8 / 5</div>
+        <div class="review-card">
+            <div class="review-author">RADIM GÓRECKI <span class="stars">★★★★★</span></div>
+            <p class="review-text">"VELICE OCHOTNÍ TECHNICI. PORADÍ, UKÁŽOU A VYSVĚTLÍ VEŠKERÉ PROBLÉMY CO NA AUTĚ JSOU."</p>
+        </div>
+        <div class="review-card">
+            <div class="review-author">DAVID OUTRATA <span class="stars">★★★★★</span></div>
+            <p class="review-text">"RYCHLÉ, KVALITNÍ A HLAVNĚ LEVNÉ."</p>
+        </div>
+    </div>
+
+    <div class="full-width-container">
+        <h2 class="main-headline">KONTAKT</h2>
+        <div class="contact-content">
+            <div class="owner-name">VÁCLAV FRANTA</div>
+            <div class="owner-ico">IČO: 73300801</div>
+            <a href="tel:+420777139677" class="contact-link">777 139 677</a>
+            <a href="mailto:AUTOSERVISVF@SEZNAM.CZ" class="contact-link email">AUTOSERVISVF@SEZNAM.CZ</a>
+            <div class="divider"></div>
+            <div class="hours-grid">
+                <div class="day">PO — PÁ</div><div class="time">08:00 — 16:00</div>
+                <div class="day">SOBOTA</div><div class="time">ZAVŘENO</div>
+                <div class="day">NEDĚLE</div><div class="time">ZAVŘENO</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="full-width-container">
+        <h2 class="main-headline">KDE NÁS NAJDETE</h2>
+        <div class="map-wrapper">
+            <div style="width:100%;height:100%;background-color:#1a1a1a;display:flex;align-items:center;justify-content:center;color:#444;font-size:12px;font-weight:700;border:1px solid #333;">
+                [ MAPA ]
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Autoservis+Václav+Franta+Návsí" target="_blank" class="map-btn">
+                Otevřít v Mapách ↗
+            </a>
+        </div>
+        <div class="sub-header-text">NÁVSÍ 760, 739 92</div>
+    </div>
+
+    <footer>
+        <div class="webflow-logo">WEBFLOW SOLUTIONS</div>
+        <a href="tel:+420731958041" class="author-phone">731 958 041</a>
+        <div class="designed-by">DESIGNED BY WEBFLOWSOLUTIONS 2026</div>
+    </footer>
+
+</body>
+</html>
